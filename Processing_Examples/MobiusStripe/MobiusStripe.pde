@@ -144,7 +144,7 @@ WETriangleMesh buildStripe(int twist) {
 public void monome(int xAxis, int yAxis, int state) {
   if(state == 1){
   rY = (yAxis * height) / 15;
-  rX = (xAxis * height) / 15;
+  rX = (xAxis * weight) / 15;
   count = count + 1;
   count = count%3;
   if(count == 2){
