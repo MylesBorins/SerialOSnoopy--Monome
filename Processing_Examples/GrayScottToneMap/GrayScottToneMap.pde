@@ -1,16 +1,12 @@
 /**
- * <p>GrayScottImage uses the seedImage() method to use a bitmap as simulation seed.
- * In this demo the image is re-applied every frame and the user can adjust the 
- * F coefficient of the reaction diffusion to produce different patterns emerging
- * from the boundary of the bitmapped seed. Unlike some other GS demos provided,
- * this one also uses a wrapped simulation space, creating tiled patterns.</p>
+ * <p>GrayScottToneMap shows how to use the ColorGradient & ToneMap classes of the
+ * colorutils package to create a tone map for rendering the results of
+ * the Gray-Scott reaction-diffusion.</p>
  *
- * <p><strong>usage:</strong></p>
- * <ul>
- * <li>click + drag mouse to locally disturb the simulation</li>
- * <li>press 1-9 to adjust the F parameter of the simulation</li> 
- * <li>press any other key to reset</li>
- * </ul>
+ * <p><strong>Usage:</strong><ul>
+ * <li>click + drag mouse to draw dots used as simulation seed</li>
+ * <li>press any key to reset</li>
+ * </ul></p>
  */
 
 /* 
@@ -35,13 +31,10 @@
 
 import toxi.sim.grayscott.*;
 import toxi.math.*;
+
 import toxi.color.*;
 
-boolean monomePressed = false;
-int monomeX;
-int monomeY;
-GrayScott gs;
-ToneMap toneMap;
+int NUM_ITERATIONS = 10;
 
 int monome_port = 8000;
 import oscP5.*;
@@ -50,12 +43,31 @@ import netP5.*;
 OscP5 oscP5;
 NetAddress myRemoteLocation;
 
+boolean monomePressed = false;
+int monomeX;
+int monomeY;
+
+GrayScott gs;
+ToneMap toneMap;
+
 void setup() {
   size(256,256);
-  gs=new GrayScott(width,height,true);
-  //img=loadImage("ti_yong.png");
-  // create a duo-tone gradient map with 256 steps
-  toneMap=new ToneMap(0,0.33,NamedColor.CRIMSON,NamedColor.WHITE,256);
+  gs=new GrayScott(width,height,false);
+  gs.setCoefficients(0.021,0.076,0.12,0.06);
+  // create a color gradient for 256 values
+  ColorGradient grad=new ColorGradient();
+  // NamedColors are preset colors, but any TColor can be added
+  // see javadocs for list of names:
+  // http://toxiclibs.org/docs/colorutils/toxi/color/NamedColor.html
+  grad.addColorAt(0,NamedColor.BLACK);
+  grad.addColorAt(128,NamedColor.RED);
+  grad.addColorAt(192,NamedColor.YELLOW);
+  grad.addColorAt(255,NamedColor.WHITE);
+  // this gradient is used to map simulation values to colors
+  // the first 2 parameters define the min/max values of the
+  // input range (Gray-Scott produces values in the interval of 0.0 - 0.5)
+  // setting the max = 0.33 increases the contrast
+  toneMap=new ToneMap(0,0.33,grad);
   /* start oscP5, listening */
   oscP5 = new OscP5(this,monome_port);
   
@@ -80,12 +92,15 @@ void setup() {
 }
 
 void draw() {
-  if(monomePressed==true){
+  if (monomePressed) {
     gs.setRect(monomeX, monomeY,20,20);
     monomePressed=false;
   }
   loadPixels();
-  for(int i=0; i<10; i++) gs.update(1);
+  // update the simulation a few time steps
+  for(int i=0; i<NUM_ITERATIONS; i++) {
+    gs.update(1);
+  }
   // read out the V result array
   // and use tone map to render colours
   for(int i=0; i<gs.v.length; i++) {
@@ -95,13 +110,7 @@ void draw() {
 }
 
 void keyPressed() {
-  if (key>='1' && key<='9') {
-    gs.setF(0.02+(key-'1')*0.001);
-  } 
-  else {
-    gs.reset();
-    monomePressed = false;
-  }
+  gs.reset();
 }
 
 public void monome(int xAxis, int yAxis, int state) {

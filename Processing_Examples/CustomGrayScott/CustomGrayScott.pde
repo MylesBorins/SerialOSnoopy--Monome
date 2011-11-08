@@ -133,11 +133,12 @@ class PatternedGrayScott extends GrayScott {
 
 
 public void monome(int xAxis, int yAxis, int state) {
-  if(state==1){
+  if(state == 1){
   xAxis = (xAxis * width) / 15;
-  monomeX = (xAxis * 9 / 10) + (xAxis / 20);
+  monomeX = (xAxis * 8 / 10) + (width / 10);
   yAxis = (yAxis * height) / 15;
-  monomeY = (yAxis * 9 / 10) + (yAxis / 20);
-  monomePressed=true;
+  monomeY = (yAxis * 8 / 10) + (height / 10);
+  monomePressed = true;
   }
 }
+
