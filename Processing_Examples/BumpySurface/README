@@ -1,5 +1,11 @@
 This sketch is dependent on both the oscP5 library as well as the
 Toxic Libs Library.
 
+The visual aspects of this code were taken from an example from
+toxic libs by Daniel Shiffman 
+<http://www.shiffman.net/teaching/nature>
+
+The osc portion is based heavily on the oscP5plug by andreas schlegel
+
 Toxic Libs: toxiclibs.org/downloads/
 oscP5: http://www.sojamo.de/libraries/oscP5/index.html
