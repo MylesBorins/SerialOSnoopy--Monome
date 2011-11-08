@@ -14,6 +14,8 @@ import org.jbox2d.dynamics.*;
 import oscP5.*;
 import netP5.*;
 
+boolean drawn = false;
+
 //Init Port
 int monome_port = 8000;
 
@@ -81,7 +83,7 @@ void setup() {
 }
 
 void draw() {
-
+  if(drawn==false){
   // We must always step through time!
   box2d.step();
 
@@ -109,9 +111,13 @@ void draw() {
   textFont(f);
   fill(0);
   text("framerate: " + (int)frameRate,12,16);
+  drawn = true;
+  }
+  
 }
 
 public void monome(int xAxis, int yAxis, int state) {
+  if(drawn==true){
   xAxis = ((xAxis * 400) / 15) + 30;
   yAxis = ((yAxis * 250) / 15) + 25;
   if (state == 1) {
@@ -120,6 +126,8 @@ public void monome(int xAxis, int yAxis, int state) {
   }
   println("### plug event method. received a message /grid/key.");
   println(" 3 ints received: "+xAxis+", "+yAxis+", "+state);
+  drawn=false;
+  }
 }
 
   
