@@ -40,14 +40,20 @@ void setup() {
    * message with address pattern /test and typetag ii will be forwarded to
    * the method test(int theA, int theB)
    */
-  oscP5.plug(this,"monome","/grid/key");
+  oscP5.plug(this,"press","/grid/key");
+  oscP5.plug(this,"led","/grid/led/set");
 }
 
-public void monome(int xAxis, int yAxis, int state) {
+public void press(int xAxis, int yAxis, int state) {
   println("### plug event method. received a message /grid/key.");
   println(" 3 ints received: "+xAxis+", "+yAxis+", "+state);  
 }
 
+public void led(int xAxis, int yAxis, int state) {
+  println("### plug event method. received a message /grid/led.");
+  println(" 3 ints received: "+xAxis+", "+yAxis+", "+state);
+ 
+}
 void draw() {
   background(0);
 }
