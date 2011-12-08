@@ -36,7 +36,7 @@ import toxi.color.*;
 
 int NUM_ITERATIONS = 10;
 
-int monome_port = 8000;
+int monome_port = 3030;
 import oscP5.*;
 import netP5.*;
 

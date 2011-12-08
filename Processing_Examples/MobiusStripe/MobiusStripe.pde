@@ -36,7 +36,7 @@ import toxi.processing.*;
 
 import processing.opengl.*;
 
-int monome_port = 8000;
+int monome_port = 3030;
 import oscP5.*;
 import netP5.*;
 

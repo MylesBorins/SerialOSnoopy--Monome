@@ -10,7 +10,7 @@
  *  This sketch depends on the oscP5 library which can be found at
  *  https://code.google.com/p/oscp5/
  */
-int monome_port = 8000;
+int monome_port = 3030;
 import oscP5.*;
 import netP5.*;
 
@@ -42,6 +42,8 @@ void setup() {
    */
   oscP5.plug(this,"press","/grid/key");
   oscP5.plug(this,"led","/grid/led/set");
+	oscP5.plug(this,"delta","/enc/delta");
+	oscP5.plug(this,"key","/enc/key");
 }
 
 public void press(int xAxis, int yAxis, int state) {
@@ -52,8 +54,18 @@ public void press(int xAxis, int yAxis, int state) {
 public void led(int xAxis, int yAxis, int state) {
   println("### plug event method. received a message /grid/led.");
   println(" 3 ints received: "+xAxis+", "+yAxis+", "+state);
- 
 }
+
+public void delta(int encoder, int value){
+  println("### plug event method. received a message /enc/delta.");
+  println(" 2 ints received: "+encoder+", "+value);
+}
+
+public void key(int encoder, int state){
+  println("### plug event method. received a message /enc/key.");
+  println(" 2 ints received: "+encoder+", "+state);
+}
+
 void draw() {
   background(0);
 }

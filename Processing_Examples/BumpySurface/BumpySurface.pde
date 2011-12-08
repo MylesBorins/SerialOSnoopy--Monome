@@ -17,7 +17,7 @@ import netP5.*;
 boolean drawn = false;
 
 //Init Port
-int monome_port = 8000;
+int monome_port = 3030;
 
 OscP5 oscP5;
 NetAddress myRemoteLocation;
