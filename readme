@@ -7,3 +7,8 @@ Utilizing the mod is fairly easy.  First copy the serialosnoopy.maxpat file into
 There should now be a new S button available within the serialosc subpatcher, click it to set the port
 
 *NOTE* Routed osc data is sent without a prefix, this will allow you to make open ended applications that can receive the SerialOSnoopy data from any application without needing modification
+
+This patch uses an external called OSC-route which was developed by Matt Wright at CNMAT.  http://cnmat.berkeley.edu/patch/4029
+It can be found in the dependencies folder and should be placed in you max externals folder.  This is the osx build of the external... so if you are on a pc you will want to get it from their website... download everything for you favorite platform
+
+http://cnmat.berkeley.edu/downloads
