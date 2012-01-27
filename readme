@@ -1,6 +1,6 @@
 SerialOSnoopy
 
-SerialOSnoopy is a mod of the serialosc abstraction that pipes all press data out on a secondary osc port.  This gives you the ability to pipe monome data into multiple application to monitor input such as processing, super collider, or even another instance of max/msp.
+SerialOSnoopy is a mod of the serialosc abstraction by Brian Crabtree that pipes all press data out on a secondary osc port.  This gives you the ability to pipe monome data into multiple application to monitor input such as processing, super collider, or even another instance of max/msp.
 
 Utilizing the mod is fairly easy.  First copy the serialosnoopy.maxpat file into any monome application folder.  Open the application and modify the patcher file from serialosc.maxpat to serialoscnoopy.maxpat.
 
